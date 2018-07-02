@@ -1,4 +1,4 @@
-# pkgDep [![Build Status](https://travis-ci.org/rjoydip/pkg-dep.svg?branch=master)](https://travis-ci.org/rjoydip/pkg-dep)
+# pkg-dep [![Build Status](https://travis-ci.org/rjoydip/pkg-dep.svg?branch=master)](https://travis-ci.org/rjoydip/pkg-dep)
 
 > Get package dependencies
 
