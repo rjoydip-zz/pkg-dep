@@ -1,4 +1,4 @@
-const pkgDep = require('.')
+const pkgDep = require('../')
 
 test('getSync', () => {
   expect(typeof pkgDep.getSync()).toBe('object')

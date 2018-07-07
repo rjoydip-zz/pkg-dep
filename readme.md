@@ -10,13 +10,9 @@ $ npm i pkg-dep
 
 ## Example
 
-### import 1
-
 ```js
 const pkgDep = require('pkg-dep')
 ```
-
-### import 2
 
 ```js
 const {PkgDep} = require('pkg-dep')
@@ -34,9 +30,20 @@ console.log(pkgDep.hasSync('dot-prop'))
 
 ## API
 
-### new pkgDep() or pkgDep()
+### new pkgDep([options]) or pkgDep()
 
 Returns a `new` instance.
+
+### pkgDep.config([options])
+
+Configure with options.
+
+#### options
+
+Type: `string`
+Default: `process.cwd()`
+
+Current working directory.
 
 ### pkgDep.get()
 

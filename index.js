@@ -1,13 +1,22 @@
 'use strict'
 
-const pkgUp = require('pkg-up')
 const readPkg = require('read-pkg')
 const dotProp = require('dot-prop')
 
 class PkgDep {
   constructor (opt) {
-    this._options = opt || { dir: process.cwd() }
-    this._readPkg = readPkg.sync(pkgUp.sync(this._options.dir))
+    this._options = opt || { cwd: process.cwd() }
+    this._readPkg = this.$readPkg()
+  }
+
+  $readPkg() {
+    return readPkg.sync({ cwd: this._options.cwd})
+  }
+
+  config(option) {
+    this._options = typeof option === 'object' ? option : {}
+    this._readPkg = this.$readPkg()
+    return this
   }
 
   _isString (value) {
@@ -31,11 +40,11 @@ class PkgDep {
   }
 
   _get () {
-    return this._isExistsDependencies && this._isExistsDevDependencies
+    return this._isExistsDependencies() && this._isExistsDevDependencies()
       ? { dependencies: this._getDependencyObj(), devDependencies: this._getDevDependencyObj() }
-      : this._isExistsDependencies
+      : this._isExistsDependencies()
         ? this._getDependencyObj()
-        : this._isExistsDevDependencies
+        : this._isExistsDevDependencies()
           ? this._getDevDependencyObj()
           : 'No dependencies are there'
   }
@@ -43,7 +52,7 @@ class PkgDep {
   _has (name) {
     const _dependency = this._getDependencyObj()
     const _devDependency = this._getDevDependencyObj()
-    return _dependency[name] ? _dependency[name] : _devDependency[name] ? _devDependency[name] : false
+    return this._isExistsDependencies() && this._isExistsDevDependencies() ? _dependency[name] || _devDependency[name] : this._isExistsDependencies() ? _dependency[name]: this._isExistsDevDependencies() ? _devDependency[name]: false
   }
 
   get () {
