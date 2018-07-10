@@ -30,9 +30,13 @@ console.log(pkgDep.hasSync('dot-prop'))
 
 ## API
 
-### new pkgDep([options]) or pkgDep()
+### new pkgDep([options])
 
 Returns a `new` instance.
+
+### pkgDep()
+
+Returns a instance of module.
 
 ### pkgDep.config([options])
 
@@ -40,7 +44,11 @@ Configure with options.
 
 #### options
 
-Type: `string`
+Type: `Object`
+
+##### cwd
+
+Type: `string`<br>
 Default: `process.cwd()`
 
 Current working directory.

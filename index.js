@@ -1,7 +1,10 @@
 'use strict'
 
+const path = require('path')
+const chalk = require('chalk')
 const readPkg = require('read-pkg')
 const dotProp = require('dot-prop')
+const fileExists = require('file-exists')
 
 class PkgDep {
   constructor (opt) {
@@ -10,7 +13,7 @@ class PkgDep {
   }
 
   $readPkg() {
-    return readPkg.sync({ cwd: this._options.cwd})
+    return fileExists.sync(path.join(this._options.cwd, 'package.json')) ? readPkg.sync({ cwd: this._options.cwd }) : (console.log(chalk.red('No package.json found')), {})
   }
 
   config(option) {
